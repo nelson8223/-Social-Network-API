@@ -8,7 +8,13 @@ const thoughtSchema = new Schema({
   author: {
     type: String,
     required: true
-  }
+  },
+  reactions: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Reaction'
+    }
+  ]
 });
 
 const userSchema = new Schema({
@@ -22,15 +28,17 @@ const userSchema = new Schema({
   }]
 });
 
-toJSON: {
+thoughtSchema.virtual('reactionCount').get(function () {
+  return this.reactions.length;
+});
+
+
+thoughtSchema.set('toJSON', {
   virtuals: true,
-}
-id: false,
-
-
-
-postSchema.virtual('reactionCount').get(function () {
-return this.reactions.length;
+  versionKey: false,
+  transform: function (doc, ret) {
+    delete ret._id;
+  }
 });
 
 const Thought = model('Thought', thoughtSchema);
