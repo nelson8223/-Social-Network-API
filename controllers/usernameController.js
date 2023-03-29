@@ -8,10 +8,10 @@ module.exports = {
   async getusernames(req, res) {
     try {
       const usernames = await User.find();
-      const usernamesObj = {
-        usernames,
-        emails: await Email.find(),
-      };
+      // const usernamesObj = {
+      //   usernames,
+      //   emails: await Email.find(),
+      // };
       return res.json(usernamesObj);
     } catch (err) {
       console.log(err);
