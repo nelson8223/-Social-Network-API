@@ -13,3 +13,5 @@ router.route('/').get(getusernames).post(createusername);
 
 
 router.route('/:usernameId').get(getsingleusername).put(updateusername).delete(deleteusername);
+
+module.exports = router;
