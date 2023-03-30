@@ -4,11 +4,8 @@ const {
   getSingleUsername,
   createUsername,
   updateUsername,
-  deleteUsername,
-  getUsername,
- 
-} = require('../../controllers/usernamecontroller');
+  deleteUsername
+} = require('../../controllers/usernameController');
 
-router.route('/').get(getUsername).post(createUsername);
-
-router.route('/:userId').get(getSingleUsername).put(updateUsername).delete(deleteUsername);
+router.route('/').get(getUsernames).post(createUsername);
+router.route('/:usernameId').get(getSingleUsername).put(updateUsername).delete(deleteUsername);

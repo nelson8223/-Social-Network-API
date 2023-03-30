@@ -1,7 +1,5 @@
-const { ObjectId } = require('mongoose').Types;
-const User = require('../models/Username');
-const Email = require('../models/email');
-const Thought = require('../models/thought');
+const { User, Thought } = require('../models');
+
 
 module.exports = {
   // Get all usernames
