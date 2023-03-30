@@ -2,7 +2,7 @@ const { User, Thought } = require('../models');
 
 module.exports = {
   // Get all usernames
-  getusername(req, res) {
+  getusernames(req, res) {
     User.find()
       .select('-__v')
       .then((dbUserData) => {
@@ -86,7 +86,7 @@ module.exports = {
   },
 
   // Update a username
-  updateuser(req, res) {
+  updateusername(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
       {
