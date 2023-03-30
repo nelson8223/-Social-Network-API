@@ -1,11 +1,15 @@
 const router = require('express').Router();
 const {
-  getUsernames,
-  getSingleUsername,
-  createUsername,
-  updateUsername,
-  deleteUsername
+  getusernames,
+  getsingleusername,
+  createusername,
+  updateusername,
+  deleteusername,
+  addthoughts,
+  
 } = require('../../controllers/usernameController');
 
-router.route('/').get(getUsernames).post(createUsername);
-router.route('/:usernameId').get(getSingleUsername).put(updateUsername).delete(deleteUsername);
+router.route('/').get(getusernames).post(createusername);
+
+
+router.route('/:usernameId').get(getsingleusername).put(updateusername).delete(deleteusername);
