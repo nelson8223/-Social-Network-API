@@ -1,6 +1,6 @@
 const connection = require('../config/connection');
-const { User, Thought, Username } = require('../models');
-const { getRandomThoughts, getRandomUsername } = require('./data');
+const { User, Thought, User } = require('../models');
+const { getRandomThoughts, getRandomUser } = require('./data');
 
 connection.on('error', (err) => err);
 
@@ -11,20 +11,20 @@ connection.once('open', async () => {
   await Thought.deleteMany({});
 
   // Drop existing users
-  await Username.deleteMany({});
+  await User.deleteMany({});
 
  
-  await Username.collection.insertMany(getRandomUsername(3));
+  await User.collection.insertMany(getRandomUser(3));
 
  
-  const username = await User.findOne();
+  const user = await User.findOne();
   await Thought.collection.insertMany(getRandomThoughts(5).map(thought => ({
     text: thought.thoughtsName,
-    author: username._id
+    author: user._id
   })));
 
   // Log out the seed data to indicate what should appear in the database
-  console.table(await Username.find());
+  console.table(await User.find());
   console.table(await Thought.find());
   console.info('Seeding complete! 🌱');
   process.exit(0);

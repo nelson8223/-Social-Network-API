@@ -1,8 +1,8 @@
-const { User, Thought } = require('../models');
+const { User, Thoughts } = require('../models/user');
 
 module.exports = {
   // Get all usernames
-  getusernames(req, res) {
+  getusers(req, res) {
     User.find()
       .select('-__v')
       .then((dbUserData) => {
@@ -15,7 +15,7 @@ module.exports = {
   },
 
   // Get a single username
-  getsingleusername(req, res) {
+  getsingleuser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select('-__v')
       .populate('friends')
@@ -33,10 +33,10 @@ module.exports = {
   },
 
   // Create a new username
-  async createusername(req, res) {
+  async createuser(req, res) {
     try {
-      const username = await User.create(req.body);
-      return res.json(username);
+      const user = await User.create(req.body);
+      return res.json(user);
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
@@ -44,15 +44,15 @@ module.exports = {
   },
 
   // Delete a username and remove it from thoughts
-  async deleteusername(req, res) {
+  async deleteuser(req, res) {
     try {
-      const username = await User.findOneAndRemove({ _id: req.params.usernameId });
-      if (!username) {
+      const user = await User.findOneAndRemove({ _id: req.params.userId });
+      if (!user) {
         return res.status(404).json({ message: 'username not found' });
       }
       const thought = await thought.findOneAndUpdate(
-        { username: req.params.usernameId },
-        { $pull: { username: req.params.usernameId } },
+        { user: req.params.userId },
+        { $pull: { user: req.params.userId } },
         { new: true }
       );
       if (!thought) {
@@ -70,12 +70,12 @@ module.exports = {
     try {
       console.log('You are adding a thought to a username');
       console.log(req.body);
-      const username = await User.findOneAndUpdate(
-        { _id: req.params.usernameId },
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
         { $addToSet: { thoughts: req.body } },
         { runValidators: true, new: true }
       );
-      if (!username) {
+      if (!user) {
         return res.status(404).json({ message: 'Username not found' });
       }
       return res.json({ message: 'Thought added to username' });
@@ -86,7 +86,7 @@ module.exports = {
   },
 
   // Update a username
-  updateusername(req, res) {
+  updateuser(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
       {
@@ -109,3 +109,6 @@ module.exports = {
       });
   },
 };
+
+
+// module.exports = userController;

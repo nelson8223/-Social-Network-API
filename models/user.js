@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 
 // Schema to create User 
-const usernameSchema = new Schema(
+const userSchema = new Schema(
   {
     username: {
       type: String,
@@ -39,11 +39,11 @@ const usernameSchema = new Schema(
   }
 );
 
-usernameSchema.virtual('friendCount').get(function () {
+userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
 });
 
 
-const Username = model('Username', usernameSchema);
+const User = model('User', userSchema);
 
-module.exports = Username;
+module.exports = User;

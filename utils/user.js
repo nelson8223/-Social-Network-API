@@ -25,4 +25,4 @@ const getRandomThoughts = (int) => {
 };
 
 // Export the functions for use in seed.js
-module.exports = { getRandomThoughts, getRandomUsername };
+module.exports = { getRandomThoughts, getRandomUser };
