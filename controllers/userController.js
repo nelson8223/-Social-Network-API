@@ -1,4 +1,4 @@
-const { User, Thoughts } = require('../models/user');
+const { User, Thoughts } = require("../models"); 
 
 module.exports = {
   // Get all usernames
@@ -111,4 +111,4 @@ module.exports = {
 };
 
 
-// module.exports = userController;
+module.exports = userController;
