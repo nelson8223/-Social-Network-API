@@ -1,7 +1,8 @@
 const { User, Thoughts } = require("../models"); 
 
-module.exports = {
+const userController = {
   // Get all usernames
+ 
   getusers(req, res) {
     User.find()
       .select('-__v')
